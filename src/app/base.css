@@ -264,10 +264,10 @@
 nav .search-box {
   max-width: var(--search-max-width);
   min-width: var(--search-min-width);
-  height: 35px;
+  height: 30px;
   border: 1px solid var(--input-border-color);
   border-radius: var(--border-radius);
-  padding: 5px 15px;
+  padding: 3px 15px;
   background: var(--input-bg-color);
   transition: var(--transition-cubic-bezier);
 }
@@ -328,7 +328,7 @@ nav .search-box-icon {
   height: 35px;
   position: absolute;
   top: -6px;
-  right: -21px;
+  right: -19px;
   background: transparent;
   border-bottom-right-radius: var(--border-radius);
   border-top-right-radius: var(--border-radius);
@@ -339,7 +339,7 @@ nav .btn-icon-content {
   width: 52px;
   height: 35px;
   top: -6px;
-  right: -21px;
+  right: -25px;
   background: transparent;
   border: none;
   cursor: pointer;
@@ -354,8 +354,8 @@ nav .btn-icon-content:hover {
 }
 
 nav .search-icon {
-  width: 21px;
-  height: 21px;
+  width: 18px;
+  height: 18px;
   position: absolute;
   top: 7px;
   right: 15px;

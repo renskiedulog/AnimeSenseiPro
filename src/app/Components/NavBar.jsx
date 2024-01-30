@@ -19,9 +19,11 @@ const NavBar = () => {
       <div className="flex h-10 w-full items-center justify-between px-2 py-6 md:px-20">
         <Link
           href="/"
-          className="color-text text-xl font-semibold tracking-wide"
+          className="color-text text-base md:text-2xl font-semibold tracking-wide flex items-center"
         >
-          AnimeSensei
+          Ani
+          <span className="md:block hidden">me</span>
+          Sensei
         </Link>
 
         <div className="color-text flex items-center gap-3 md:gap-5">

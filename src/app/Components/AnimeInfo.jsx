@@ -54,11 +54,9 @@ const AnimeInfo = ({ anime }) => {
         <p className="text-center text-2xl font-bold md:text-left">
           {anime?.title}
         </p>
-        {anime?.attributes?.altTitles && (
-          <div className="flex flex-wrap items-center justify-center gap-2 py-1 text-sm opacity-50 md:justify-start md:text-base">
-            {anime?.otherName}
-          </div>
-        )}
+        <div className="flex flex-wrap items-center text-center md:text-left justify-center gap-2 py-1 mr-3 text-sm opacity-50 md:justify-start md:text-base">
+          {anime?.otherName}
+        </div>
         <div className="my-2 flex flex-wrap items-center justify-center gap-1 md:justify-start">
           <Link
             href="#"
