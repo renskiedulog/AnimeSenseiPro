@@ -1,6 +1,6 @@
 import { getTopAnimes, makeRequest } from "@/API/request";
-import PopularAnimes from "./../../../Components/PopularAnimes";
-import AnimeInfo from "./../../../Components/AnimeInfo";
+import PopularAnimes from "../../Components/PopularAnimes";
+import AnimeInfo from "../../Components/AnimeInfo";
 import Link from "next/link";
 
 const page = async ({ params }) => {

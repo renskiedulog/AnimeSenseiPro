@@ -1,9 +1,8 @@
 import { getCarousel, getTopAnimes } from "@/API/request";
-import AnimeCarousel from "./../Components/AnimeCarousel";
-import FeaturedAnime from "./../Components/FeaturedAnime";
-import Animes from "./../Components/Animes";
-import PopularAnimes from "./../Components/PopularAnimes";
-
+import AnimeCarousel from "./Components/AnimeCarousel";
+import FeaturedAnime from "./Components/FeaturedAnime";
+import Animes from "./Components/Animes";
+import PopularAnimes from "./Components/PopularAnimes";
 const page = async () => {
   const carousel = await getCarousel();
   const popular = await getTopAnimes();
