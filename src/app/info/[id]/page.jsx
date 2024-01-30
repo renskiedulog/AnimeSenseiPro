@@ -2,6 +2,7 @@ import { getTopAnimes, makeRequest } from "@/API/request";
 import PopularAnimes from "../../Components/PopularAnimes";
 import AnimeInfo from "../../Components/AnimeInfo";
 import Link from "next/link";
+import Episodes from "./../../Components/Episodes";
 
 const page = async ({ params }) => {
   const anime = await makeRequest(`/info/${params?.id}`);
@@ -20,7 +21,7 @@ const page = async ({ params }) => {
         {/* Manga Info */}
         <AnimeInfo anime={anime} />
         {/* Manga Chapters */}
-        {/* <Chapters mangaId={params.id} chapters={chapter} /> */}
+        <Episodes episodes={anime?.episodes} animeId={anime?.id} />
       </div>
       <PopularAnimes animes={popular} />
     </div>
