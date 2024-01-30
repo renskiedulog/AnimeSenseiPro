@@ -67,7 +67,7 @@ const NavBar = () => {
             className="mx-2 rounded bg-purple-800 px-3 md:px-5 py-2 md:py-1 text-xs hover:scale-105 md:text-base flex gap-1 items-center"
           >
             <p className="md:block hidden">Random</p>
-            <i class="fa-solid fa-shuffle"></i>
+            {/* <i class="fa-solid fa-shuffle"></i> */}
           </button>
         </div>
       </div>
