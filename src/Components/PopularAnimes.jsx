@@ -42,7 +42,7 @@ const PopularAnimes = ({ animes }) => {
           return (
             <div
               key={index}
-              className={`group overflow-hidden relative h-32 max-h-32 my-3 mx-3 ${
+              className={`group overflow-hidden relative h-28 max-h-28 rounded my-2 mx-2 ${
                 index === 0 ? "" : "border-t border-[#fff1]"
               }`}
             >

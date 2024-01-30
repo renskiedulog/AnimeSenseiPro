@@ -35,12 +35,6 @@ const NavBar = () => {
         {/* Left Side : User Related */}
         <div className="flex">
           <Link
-            href="/"
-            className="px-2 py-[10px] text-xs font-normal hover:bg-purple-500 md:px-5 md:text-base"
-          >
-            Home
-          </Link>
-          <Link
             href="#"
             className="px-2 py-[10px] text-xs font-normal hover:bg-purple-500 md:px-5 md:text-base"
           >
@@ -52,27 +46,28 @@ const NavBar = () => {
           >
             Social
           </Link>
+          <Link
+            href="#"
+            className="px-2 py-[10px] text-xs font-normal hover:bg-purple-500 md:px-5 md:text-base"
+          >
+            Genres
+          </Link>
+          <Link
+            href="#"
+            className="px-2 py-[10px] text-xs font-normal hover:bg-purple-500 md:px-5 md:text-base"
+          >
+            Movies
+          </Link>
         </div>
         {/* Right Side : Site Related */}
         <div className="flex items-center">
-          <Link
-            href="#"
-            className="px-2 py-[10px] text-xs font-normal hover:bg-purple-500 md:px-5 md:text-base"
-          >
-            Latest
-          </Link>
-          <Link
-            href="#"
-            className="px-2 py-[10px] text-xs font-normal hover:bg-purple-500 md:px-5 md:text-base"
-          >
-            Top Read
-          </Link>
           <button
             type="button"
             // onClick={() => randomize()}
-            className="mx-2 rounded bg-purple-800 px-5 py-1 text-xs hover:scale-105 md:text-base"
+            className="mx-2 rounded bg-purple-800 px-3 md:px-5 py-2 md:py-1 text-xs hover:scale-105 md:text-base flex gap-1 items-center"
           >
-            Random
+            <p className="md:block hidden">Random</p>
+            <i class="fa-solid fa-shuffle"></i>
           </button>
         </div>
       </div>
