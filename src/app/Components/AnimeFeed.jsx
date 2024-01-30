@@ -9,7 +9,7 @@ export const AnimeFeed = async () => {
   return animes?.results?.map((anime, index) => (
     <Link
       key={index}
-      className="group w-full overflow-hidden hover:scale-[1.01] px-2 md:px-0"
+      className="group w-full overflow-hidden hover:scale-[1.01] px-1 md:px-0"
       href={`/info/${anime?.id}`}
     >
       <img

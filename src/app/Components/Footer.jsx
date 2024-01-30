@@ -4,7 +4,7 @@ const Footer = () => {
   return (
     <>
       <div className="mx-auto flex w-full max-w-screen-2xl items-center justify-between bg-purple-600 px-2 py-2 text-white md:px-16">
-        <p className="text-xs md:text-base">
+        <p className="text-xs md:text-base w-4/12 md:w-full">
           Copyrights 2023 © All Rights Reserved.
         </p>
         <div className="flex items-center justify-center gap-2 text-xs md:text-base">

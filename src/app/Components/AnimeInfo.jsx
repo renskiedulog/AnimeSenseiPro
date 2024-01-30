@@ -50,7 +50,7 @@ const AnimeInfo = ({ anime }) => {
         </div>
       </div>
       {/* anime Details */}
-      <div className="scrollbar mr-5 max-h-full p-5 md:overflow-y-auto md:p-0">
+      <div className="scrollbar max-h-full p-5 md:overflow-y-auto md:p-0">
         <p className="text-center text-2xl font-bold md:text-left">
           {anime?.title}
         </p>
@@ -98,7 +98,7 @@ const AnimeInfo = ({ anime }) => {
         </div>
         <div>
           <h1 className="py-1 md:text-base">Sypnosis:</h1>
-          <p className="mt-1 pr-5 text-sm font-light opacity-80 md:text-base">
+          <p className="mt-1 pr-0 md:pr-5 text-sm font-light opacity-80 md:text-base">
             {anime?.description}
           </p>
           <div className="grid h-max grid-cols-2 py-2 text-sm md:text-base">
@@ -123,7 +123,7 @@ const AnimeInfo = ({ anime }) => {
           </div>
           <div>
             <h1>Genres</h1>
-            <div className="flex flex-wrap gap-1.5">
+            <div className="mt-1 flex flex-wrap gap-1.5">
               {anime?.genres?.map((genre, index) => (
                 <Link
                   key={index}
