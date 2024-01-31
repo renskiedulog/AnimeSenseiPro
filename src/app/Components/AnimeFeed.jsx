@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const AnimeFeed = async () => {
   const animes = await makeRequest("/recent-episodes", {
-    cache: "force-cache",
+    revalidate: 60,
   });
 
   return animes?.results?.map((anime, index) => (

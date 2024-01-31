@@ -11,8 +11,8 @@ export const makeRequest = async (endpoint, config) => {
 };
 
 export const getTopAnimes = async () => {
-    const top = await makeRequest("/top-airing", { cache: 'force-cache' });
-    const popular = await makeRequest("/popular", { cache: 'force-cache' });
+    const top = await makeRequest("/top-airing", { revalidate: 3600 });
+    const popular = await makeRequest("/popular", { revalidate: 3600 });
     return { top: top.results, popular: popular.results }
 }
 
@@ -21,7 +21,7 @@ export const getCarousel = async () => {
     const result = [];
     const carousel = [];
     while (page < maxPage) {
-        const request = await makeRequest(`/popular?page=${page}`, { cache: 'force-cache' });
+        const request = await makeRequest(`/popular?page=${page}`, { cache: 'no-cache' });
         result.push(...(request?.results || []))
         page++;
     }
