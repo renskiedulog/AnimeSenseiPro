@@ -10,7 +10,7 @@ export const AnimeFeed = async () => {
     <Link
       key={index}
       className="group w-full overflow-hidden hover:scale-[1.01] px-1 md:px-0"
-      href={`/info/${anime?.id}`}
+      href={`/${anime?.id}`}
     >
       <img
         className="z-10 mx-auto aspect-[1/1.5] max-h-52 w-full rounded object-cover"

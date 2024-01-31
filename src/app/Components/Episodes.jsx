@@ -1,15 +1,40 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
-const Episodes = ({ episodes, animeId }) => {
-  console.log(episodes);
+const Episodes = ({ episodes, animeId, episodeId }) => {
+  const router = useRouter();
+
   const [maxEpisodes, setMaxEpisodes] = useState(99);
   const [minEpisodes, setMinEpisodes] = useState(-1);
   const [currentSet, setCurrentSet] = useState({ min: 0, max: 100 });
   const itemsPerPage = 100;
 
+  const [currentEpisode, setCurrentEpisode] = useState(episodeId || "");
+  const [nextEpisode, setNextEpisode] = useState(null);
+  const [prevEpisode, setPrevEpisode] = useState(null);
+
   const buttonCount = Math.ceil(episodes?.length / itemsPerPage);
+
+  useEffect(() => {
+    setCurrentEpisode(episodeId || "");
+    episodes?.map((episode, index) => {
+      if (episode.id === episodeId) {
+        console.log(episode.id);
+        if (index !== 0) {
+          setPrevEpisode(episodes[index - 1]?.id);
+        }
+        if (index + 1 !== episodes.length) {
+          setNextEpisode(episodes[index + 1]?.id);
+        }
+      }
+    });
+  }, [episodeId, episodes]);
+
+  const handleButton = (epId) => {
+    router.push(`/${animeId}/watch/${epId}`);
+  };
 
   const handleFilter = (min, max) => {
     setMinEpisodes(min);
@@ -38,8 +63,44 @@ const Episodes = ({ episodes, animeId }) => {
   });
 
   return (
-    <div className="background mt-3 rounded">
-      <h1 className="font-bold border-b border-[#fff2] w-full">EPISODES</h1>
+    <div className="background mt-3 rounded-none md:rounded">
+      <div className="font-bold border-b border-[#fff2] w-full px-3 py-2 text-lg flex items-center justify-between">
+        <p className="text-lg text-white">EPISODES</p>
+        {episodeId && (
+          <div>
+            {prevEpisode !== null ? (
+              <button
+                className="mx-1 min-w-10 rounded-3xl bg-purple-700 px-5 py-1 font-normal"
+                onClick={() => handleButton(prevEpisode)}
+              >
+                Prev
+              </button>
+            ) : (
+              <button
+                className="mx-1 min-w-10 rounded-3xl bg-[#fff1] px-5 py-1 font-normal"
+                disabled
+              >
+                Prev
+              </button>
+            )}
+            {nextEpisode !== null ? (
+              <button
+                className="mx-1 min-w-10 rounded-3xl bg-purple-700 px-5 py-1 font-normal"
+                onClick={() => handleButton(nextEpisode)}
+              >
+                Next
+              </button>
+            ) : (
+              <button
+                className="mx-1 min-w-10 rounded-3xl bg-[#fff1] px-5 py-1 font-normal"
+                disabled
+              >
+                Next
+              </button>
+            )}
+          </div>
+        )}
+      </div>
       {episodes?.length > itemsPerPage && (
         <div className="px-3 py-2 flex flex-wrap gap-2">{filterButtons}</div>
       )}

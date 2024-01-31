@@ -21,7 +21,7 @@ const PopularAnimes = ({ animes }) => {
   };
 
   return (
-    <div className="background color-text h-max w-full overflow-hidden rounded-md">
+    <div className="background color-text h-max w-full overflow-hidden rounded-none md:rounded-md">
       <header key="header" className="flex border-b-[1px] border-[#fff1]">
         <button
           className={`px-3  py-2 ${toggle ? "text-purple-500" : ""}`}
@@ -49,7 +49,7 @@ const PopularAnimes = ({ animes }) => {
               <div className="bg-purple-500 w-28 absolute top-2 z-20 text-center py-1 -rotate-45 left-[-2rem]">
                 <p className="rotate-45">{index + 1}</p>
               </div>
-              <Link key={index} href={`/info/${anime?.id}`}>
+              <Link key={index} href={`/${anime?.id}`}>
                 <img
                   className="absolute w-full top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] rounded brightness-50"
                   src={anime?.image}

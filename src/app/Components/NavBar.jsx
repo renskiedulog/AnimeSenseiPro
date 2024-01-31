@@ -21,9 +21,12 @@ const NavBar = () => {
           href="/"
           className="color-text text-base md:text-2xl font-semibold tracking-wide flex items-center"
         >
-          Ani
-          <span className="md:block hidden">me</span>
-          Sensei
+          <p className="md:block hidden">AnimeSensei</p>
+          <img
+            src="/logo.png"
+            alt="nav-logo"
+            className="w-20 h-20 md:hidden block"
+          />
         </Link>
 
         <div className="color-text flex items-center gap-3 md:gap-5">

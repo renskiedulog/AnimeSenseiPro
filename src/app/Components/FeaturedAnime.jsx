@@ -40,7 +40,7 @@ const FeaturedAnime = () => {
 
   return (
     <Link
-      href={`/info/${featured?.id}`}
+      href={`/${featured?.id}`}
       className="group relative hidden overflow-hidden md:block"
     >
       <img

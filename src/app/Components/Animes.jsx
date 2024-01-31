@@ -4,7 +4,7 @@ import AnimeFeed from "./AnimeFeed";
 
 const Animes = () => {
   return (
-    <div className="background h-full w-full rounded">
+    <div className="background h-full w-full rounded-none md:rounded">
       <header className="flex items-center justify-between border-b border-[#fff2] px-2 py-1 md:py-2">
         <p className="text-md md:text-lg">Latest</p>
         <Link

@@ -57,14 +57,14 @@ const AnimeCarousel = ({ animes }) => {
 
   return (
     <div
-      className="showcase scrollbar-hidden relative flex h-[200px] w-full snap-x snap-mandatory items-start overflow-x-auto overflow-y-hidden rounded-md bg-cover bg-center bg-no-repeat transition-all md:h-[250px] md:rounded-r-none"
+      className="showcase scrollbar-hidden relative flex h-[200px] w-full snap-x snap-mandatory items-start overflow-x-auto overflow-y-hidden rounded-none md:rounded-md bg-cover bg-center bg-no-repeat transition-all md:h-[250px] md:rounded-r-none"
       ref={carouselRef}
     >
       {animes.map((anime, index) => {
         return (
           <div
             key={index}
-            className="grid h-full w-full flex-shrink-0 snap-start grid-cols-[70%,30%] items-center gap-1 px-2 backdrop-blur-sm backdrop-brightness-50 transition-all md:grid-cols-[75%,25%] md:px-5"
+            className="grid h-full w-full flex-shrink-0 snap-start grid-cols-[65%,35%] items-center gap-1 px-2 backdrop-blur-sm backdrop-brightness-50 transition-all md:grid-cols-[75%,25%] md:px-5"
           >
             <img
               src={anime?.image}
@@ -131,7 +131,7 @@ const AnimeCarousel = ({ animes }) => {
                 </p>
               </div>
             </div>
-            <Link href={`/info/${anime?.id}`} className="pr-3 md:pr-0">
+            <Link href={`/${anime?.id}`} className="pr-3 md:pr-0">
               <img
                 className="relative z-10 aspect-auto rounded hover:scale-[1.03] md:w-full"
                 src={anime?.image}
