@@ -21,7 +21,6 @@ const Episodes = ({ episodes, animeId, episodeId }) => {
     setCurrentEpisode(episodeId || "");
     episodes?.map((episode, index) => {
       if (episode.id === episodeId) {
-        console.log(episode.id);
         if (index !== 0) {
           setPrevEpisode(episodes[index - 1]?.id);
         }
@@ -63,21 +62,27 @@ const Episodes = ({ episodes, animeId, episodeId }) => {
   });
 
   return (
-    <div className="background mt-3 rounded-none md:rounded">
+    <div
+      className={`background mt-3 md:rounded ${
+        episodeId
+          ? "md:w-8/12 w-10/12 mx-auto rounded-sm"
+          : "w-full rounded-none"
+      }`}
+    >
       <div className="font-bold border-b border-[#fff2] w-full px-3 py-2 text-lg flex items-center justify-between">
         <p className="text-lg text-white">EPISODES</p>
         {episodeId && (
-          <div>
+          <div className="md:text-base text-sm">
             {prevEpisode !== null ? (
               <button
-                className="mx-1 min-w-10 rounded-3xl bg-purple-700 px-5 py-1 font-normal"
+                className="mx-1 min-w-10 rounded hover:scale-105 bg-purple-500 px-3 md:px-5 py-1 font-normal"
                 onClick={() => handleButton(prevEpisode)}
               >
                 Prev
               </button>
             ) : (
               <button
-                className="mx-1 min-w-10 rounded-3xl bg-[#fff1] px-5 py-1 font-normal"
+                className="mx-1 min-w-10 rounded hover:scale-105 bg-[#fff1] px-3 md:px-5 py-1 font-normal"
                 disabled
               >
                 Prev
@@ -85,14 +90,14 @@ const Episodes = ({ episodes, animeId, episodeId }) => {
             )}
             {nextEpisode !== null ? (
               <button
-                className="mx-1 min-w-10 rounded-3xl bg-purple-700 px-5 py-1 font-normal"
+                className="mx-1 min-w-10 rounded hover:scale-105 bg-purple-500 px-3 md:px-5 py-1 font-normal"
                 onClick={() => handleButton(nextEpisode)}
               >
                 Next
               </button>
             ) : (
               <button
-                className="mx-1 min-w-10 rounded-3xl bg-[#fff1] px-5 py-1 font-normal"
+                className="mx-1 min-w-10 rounded hover:scale-105 bg-[#fff1] px-3 md:px-5 py-1 font-normal"
                 disabled
               >
                 Next
@@ -114,7 +119,11 @@ const Episodes = ({ episodes, animeId, episodeId }) => {
                 <Link
                   key={episode?.number}
                   href={`/${animeId}/watch/${episode.id}`}
-                  className="bg-purple-500 hover:scale-105 px-2 py-1 w-20 flex-grow max-w-24 md:w-24 md:max-w-32"
+                  className={`${
+                    episode?.id === episodeId
+                      ? "bg-purple-700"
+                      : "bg-purple-500"
+                  } hover:scale-105 px-2 py-1 w-20 flex-grow max-w-24 md:w-24 md:max-w-32`}
                 >
                   <div className="text-center text-xs md:text-base">
                     <p>EP {episode.number}</p>
