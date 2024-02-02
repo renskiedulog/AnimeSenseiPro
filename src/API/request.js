@@ -17,19 +17,24 @@ export const getTopAnimes = async () => {
 }
 
 export const getCarousel = async () => {
-    let maxPage = 5, page = 1;
-    const result = [];
+    let maxPage = 7, page = 1;
     const carousel = [];
     while (page < maxPage) {
-        const request = await makeRequest(`/popular?page=${page}`, { cache: 'no-cache' });
-        result.push(...(request?.results || []))
-        page++;
-    }
-    for (let i = 0; i < 5; i++) {
-        let randIndex = Math.floor(Math.random() * result?.length - 1);
-        const req = await makeRequest(`/info/${result[randIndex]?.id}`);
-        carousel.push(req);
-        result.splice(result[randIndex], 1);
+        let randomPage = Math.floor(Math.random() * 10),
+            randomIndex = Math.floor(Math.random() * 20);
+        const req = await makeRequest(`/popular?page=${randomPage}`, { cache: 'no-cache' });
+        const randomAnime = req.results[randomIndex];
+        const animeInfo = await makeRequest(`/info/${randomAnime?.id}`);
+        carousel.push(animeInfo);
+        page++
     }
     return carousel;
+}
+
+export const getRandomAnime = async () => {
+    let randomPage = Math.floor(Math.random() * 500),
+        randomIndex = Math.floor(Math.random() * 20);
+    const req = await makeRequest(`/popular?page=${randomPage}`, { cache: 'no-cache' });
+    const randomAnime = req.results[randomIndex];
+    return randomAnime?.id;
 }

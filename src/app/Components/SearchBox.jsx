@@ -1,4 +1,23 @@
+"use client";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 const SearchBox = () => {
+  const router = useRouter();
+  const [search, setSearch] = useState("");
+
+  const handleOnChange = (event) => {
+    const { value } = event.target;
+    setSearch(value);
+  };
+
+  useEffect(() => {
+    window.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") {
+        document.querySelector(".search-btn").click();
+      }
+    });
+  }, []);
+
   return (
     <div className="search">
       <div className="search-box">
@@ -7,9 +26,19 @@ const SearchBox = () => {
             placeholder="Search..."
             className="input color-text"
             type="text"
+            value={search ? search : ""}
+            onChange={handleOnChange}
           />
           <div className="search-box-icon">
-            <button className="btn-icon-content">
+            <button
+              className="btn-icon-content search-btn"
+              onClick={() => {
+                if (search !== "") {
+                  router.push(`/search/${search}`);
+                  setSearch("");
+                }
+              }}
+            >
               <i className="search-icon">
                 <svg
                   xmlns="://www.w3.org/2000/svg"

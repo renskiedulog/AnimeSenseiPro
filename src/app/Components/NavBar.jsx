@@ -2,16 +2,16 @@
 import Link from "next/link";
 import ToggleSwitch from "./ToggleSwitch";
 import SearchBox from "./SearchBox";
-// import { getRandomManga } from "../API/request";
 import { useRouter } from "next/navigation";
+import { getRandomAnime } from "@/API/request";
 
 const NavBar = () => {
   const router = useRouter();
 
-  // const randomize = async () => {
-  //   const id = await getRandomManga();
-  //   router.push(`/manga/${id}`);
-  // };
+  const randomize = async () => {
+    const id = await getRandomAnime();
+    router.push(`/${id}`);
+  };
 
   return (
     <nav className="mx-auto max-w-screen-2xl">
@@ -58,7 +58,7 @@ const NavBar = () => {
             Genres
           </Link>
           <Link
-            href="#"
+            href="/filter/movies"
             className="px-2 py-[10px] text-xs font-normal hover:bg-purple-500 md:px-5 md:text-base"
           >
             Movies
@@ -68,7 +68,7 @@ const NavBar = () => {
         <div className="flex items-center">
           <button
             type="button"
-            // onClick={() => randomize()}
+            onClick={() => randomize()}
             className="mx-2 rounded bg-purple-800 px-3 md:px-5 py-2 md:py-1 text-xs hover:scale-105 md:text-base flex gap-1 items-center"
           >
             <p className="md:block hidden">Random</p>

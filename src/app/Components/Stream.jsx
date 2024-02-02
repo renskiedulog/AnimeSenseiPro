@@ -36,6 +36,7 @@ const Stream = ({ episodeId }) => {
     }
   }, [episode, quality]);
 
+  console.log(episode);
   return (
     <div className="md:w-10/12 w-full mx-auto py-2">
       <header className="p-2 flex items-center justify-between">

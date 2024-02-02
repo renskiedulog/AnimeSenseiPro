@@ -8564,8 +8564,7 @@ readers do not read off random characters that represent icons */
   font-style: normal;
   font-weight: 400;
   font-display: block;
-  src:
-    url("./_webfonts/fa-brands-400.woff2") format("woff2"),
+  src: url("./_webfonts/fa-brands-400.woff2") format("woff2"),
     url("./_webfonts/fa-brands-400.ttf") format("truetype");
 }
 
@@ -10656,8 +10655,7 @@ readers do not read off random characters that represent icons */
   font-style: normal;
   font-weight: 400;
   font-display: block;
-  src:
-    url("./_webfonts/fa-regular-400.woff2") format("woff2"),
+  src: url("./_webfonts/fa-regular-400.woff2") format("woff2"),
     url("./_webfonts/fa-regular-400.ttf") format("truetype");
 }
 
@@ -10676,8 +10674,7 @@ readers do not read off random characters that represent icons */
   font-style: normal;
   font-weight: 900;
   font-display: block;
-  src:
-    url("./_webfonts/fa-solid-900.woff2") format("woff2"),
+  src: url("./_webfonts/fa-solid-900.woff2") format("woff2"),
     url("./_webfonts/fa-solid-900.ttf") format("truetype");
 }
 
@@ -10689,8 +10686,7 @@ readers do not read off random characters that represent icons */
   font-family: "Font Awesome 5 Brands";
   font-display: block;
   font-weight: 400;
-  src:
-    url("./_webfonts/fa-brands-400.woff2") format("woff2"),
+  src: url("./_webfonts/fa-brands-400.woff2") format("woff2"),
     url("./_webfonts/fa-brands-400.ttf") format("truetype");
 }
 
@@ -10698,8 +10694,7 @@ readers do not read off random characters that represent icons */
   font-family: "Font Awesome 5 Free";
   font-display: block;
   font-weight: 900;
-  src:
-    url("./_webfonts/fa-solid-900.woff2") format("woff2"),
+  src: url("./_webfonts/fa-solid-900.woff2") format("woff2"),
     url("./_webfonts/fa-solid-900.ttf") format("truetype");
 }
 
@@ -10707,31 +10702,27 @@ readers do not read off random characters that represent icons */
   font-family: "Font Awesome 5 Free";
   font-display: block;
   font-weight: 400;
-  src:
-    url("./_webfonts/fa-regular-400.woff2") format("woff2"),
+  src: url("./_webfonts/fa-regular-400.woff2") format("woff2"),
     url("./_webfonts/fa-regular-400.ttf") format("truetype");
 }
 @font-face {
   font-family: "FontAwesome";
   font-display: block;
-  src:
-    url("./_webfonts/fa-solid-900.woff2") format("woff2"),
+  src: url("./_webfonts/fa-solid-900.woff2") format("woff2"),
     url("./_webfonts/fa-solid-900.ttf") format("truetype");
 }
 
 @font-face {
   font-family: "FontAwesome";
   font-display: block;
-  src:
-    url("./_webfonts/fa-brands-400.woff2") format("woff2"),
+  src: url("./_webfonts/fa-brands-400.woff2") format("woff2"),
     url("./_webfonts/fa-brands-400.ttf") format("truetype");
 }
 
 @font-face {
   font-family: "FontAwesome";
   font-display: block;
-  src:
-    url("./_webfonts/fa-regular-400.woff2") format("woff2"),
+  src: url("./_webfonts/fa-regular-400.woff2") format("woff2"),
     url("./_webfonts/fa-regular-400.ttf") format("truetype");
   unicode-range: U+F003, U+F006, U+F014, U+F016-F017, U+F01A-F01B, U+F01D,
     U+F022, U+F03E, U+F044, U+F046, U+F05C-F05D, U+F06E, U+F070, U+F087-F088,
@@ -10747,11 +10738,20 @@ readers do not read off random characters that represent icons */
 @font-face {
   font-family: "FontAwesome";
   font-display: block;
-  src:
-    url("./_webfonts/fa-v4compatibility.woff2") format("woff2"),
+  src: url("./_webfonts/fa-v4compatibility.woff2") format("woff2"),
     url("./_webfonts/fa-v4compatibility.ttf") format("truetype");
   unicode-range: U+F041, U+F047, U+F065-F066, U+F07D-F07E, U+F080, U+F08B,
     U+F08E, U+F090, U+F09A, U+F0AC, U+F0AE, U+F0B2, U+F0D0, U+F0D6, U+F0E4,
     U+F0EC, U+F10A-F10B, U+F123, U+F13E, U+F148-F149, U+F14C, U+F156, U+F15E,
     U+F160-F161, U+F163, U+F175-F178, U+F195, U+F1F8, U+F219, U+F27A;
+}
+
+input.increment-disabled::-webkit-outer-spin-button,
+input.increment-disabled::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"].increment-disabled {
+  -moz-appearance: textfield;
 }
