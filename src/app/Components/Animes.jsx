@@ -17,7 +17,7 @@ export const Animes = ({ movies, filter, search }) => {
           : filter
           ? `/genre/${filter}?page=${page}`
           : search
-          ? `/${search}`
+          ? `/${search}?page=${page}`
           : "/recent-episodes"
       }`,
       {
@@ -29,9 +29,8 @@ export const Animes = ({ movies, filter, search }) => {
     });
   }, [page]);
 
-  console.log(animes);
   return (
-    <div className="background min-h-[50vh] h-full w-full rounded-none md:rounded relative flex flex-col">
+    <div className="background min-h-[50vh] h-full w-full rounded-none md:rounded relative">
       <header className="flex items-center justify-between border-b border-[#fff2] px-2 py-1 md:py-2">
         <p className="text-md md:text-lg">
           {movies
@@ -117,51 +116,36 @@ export const Animes = ({ movies, filter, search }) => {
           </div>
         )}
       </div>
-      {movies ||
-        (filter && (
-          <footer className="flex items-center justify-between border-b border-[#fff2] px-2 py-1 md:py-2">
-            <p className="text-md md:text-lg">
-              {movies ? "Movies" : filter ? filter : "Latest"}
-            </p>
-            {movies || filter ? (
-              <div>
-                <button
-                  className={`px-2 text-white py-1 text-xs md:text-sm mx-1 rounded-sm ${
-                    page === 1 ? "bg-[#fff1]" : "bg-purple-500 hover:scale-105"
-                  }`}
-                  disabled={page === 1 ? true : false}
-                  onClick={() => setPage((prev) => parseInt(prev) - 1)}
-                >
-                  Prev
-                </button>
-                <input
-                  type="number"
-                  className="increment-disabled mx-1 text-center text-white border-[#fff3] border bg-transparent max-w-10 p-1 rounded-md"
-                  value={page}
-                  onChange={(e) => setPage(e.target.value)}
-                />
-                <button
-                  className={`px-2 text-white py-1 text-xs md:text-sm mx-1 rounded-sm ${
-                    !animes?.hasNextPage
-                      ? "bg-[#fff1]"
-                      : "bg-purple-500 hover:scale-105"
-                  }`}
-                  disabled={!animes?.hasNextPage}
-                  onClick={() => setPage((prev) => parseInt(prev) + 1)}
-                >
-                  Next
-                </button>
-              </div>
-            ) : (
-              <Link
-                href="#"
-                className="rounded bg-purple-500 px-2 py-1 text-xs text-white md:text-sm"
-              >
-                View All
-              </Link>
-            )}
-          </footer>
-        ))}
+      {(movies || filter || search) && animes?.hasNextPage && (
+        <div className="absolute bottom-5 right-5">
+          <button
+            className={`px-2 text-white py-1 text-xs md:text-sm mx-1 rounded-sm ${
+              page === 1 ? "bg-[#fff1]" : "bg-purple-500 hover:scale-105"
+            }`}
+            disabled={page === 1 ? true : false}
+            onClick={() => setPage((prev) => parseInt(prev) - 1)}
+          >
+            Prev
+          </button>
+          <input
+            type="number"
+            className="increment-disabled mx-1 text-center text-white border-[#fff3] border bg-transparent max-w-10 p-1 rounded-md"
+            value={page}
+            onChange={(e) => setPage(e.target.value)}
+          />
+          <button
+            className={`px-2 text-white py-1 text-xs md:text-sm mx-1 rounded-sm ${
+              !animes?.hasNextPage
+                ? "bg-[#fff1]"
+                : "bg-purple-500 hover:scale-105"
+            }`}
+            disabled={!animes?.hasNextPage}
+            onClick={() => setPage((prev) => parseInt(prev) + 1)}
+          >
+            Next
+          </button>
+        </div>
+      )}
     </div>
   );
 };
