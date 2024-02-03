@@ -31,12 +31,12 @@ export const Animes = ({ filter, search, recents }) => {
     ).then((res) => {
       setAnimes(res);
       setLoading(false);
+    });
 
-      // Scrolls When User Changes Mode
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth", // Optional: adds a smooth scrolling animation
-      });
+    // Scrolls When User Changes Mode
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // Optional: adds a smooth scrolling animation
     });
   }, [page, filter, search]);
 
@@ -46,7 +46,7 @@ export const Animes = ({ filter, search, recents }) => {
         <p className="text-md md:text-lg">
           {filter ? filter.toUpperCase() : search ? "Search Results" : "Latest"}
         </p>
-        {filter || recents ? (
+        {(filter || recents || (search && animes?.hasNextPage)) && (
           <div>
             <button
               className={`px-2 text-white py-1 text-xs md:text-sm mx-1 rounded-sm ${
@@ -75,15 +75,6 @@ export const Animes = ({ filter, search, recents }) => {
               Next
             </button>
           </div>
-        ) : search ? (
-          ""
-        ) : (
-          <Link
-            href="/filter"
-            className="hover:scale-105 rounded bg-purple-500 px-2 py-1 text-xs text-white md:text-sm"
-          >
-            View All
-          </Link>
         )}
       </header>
       {/* Manga Feed */}
@@ -101,7 +92,7 @@ export const Animes = ({ filter, search, recents }) => {
                   className="group"
                 >
                   <img
-                    className="z-10 mx-auto aspect-[1/1.5] max-h-52 w-full rounded object-cover"
+                    className="z-10 mx-auto md:aspect-[1/1.5] aspect-[1/1.2] w-full rounded object-cover"
                     src={anime?.image}
                     alt={anime?.title}
                   />
@@ -133,7 +124,7 @@ export const Animes = ({ filter, search, recents }) => {
           </div>
         )}
       </div>
-      {(filter || search || recents) && animes?.hasNextPage && (
+      {animes?.hasNextPage && (
         <div className="absolute bottom-2 right-5">
           <button
             className={`px-2 text-white py-1 text-xs md:text-sm mx-1 rounded-sm ${
