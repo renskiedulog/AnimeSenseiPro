@@ -3,7 +3,7 @@ import { makeRequest } from "@/API/request";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-export const Animes = ({ movies, filter, search }) => {
+export const Animes = ({ movies, filter, search, recents }) => {
   const [animes, setAnimes] = useState([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -18,7 +18,7 @@ export const Animes = ({ movies, filter, search }) => {
           ? `/genre/${filter}?page=${page}`
           : search
           ? `/${search}?page=${page}`
-          : "/recent-episodes"
+          : `/recent-episodes?page=${page}`
       }`,
       {
         revalidate: 60,
@@ -45,7 +45,7 @@ export const Animes = ({ movies, filter, search }) => {
             ? "Search Results"
             : "Latest"}
         </p>
-        {movies || filter ? (
+        {movies || filter || recents ? (
           <div>
             <button
               className={`px-2 text-white py-1 text-xs md:text-sm mx-1 rounded-sm ${
@@ -78,8 +78,8 @@ export const Animes = ({ movies, filter, search }) => {
           ""
         ) : (
           <Link
-            href="#"
-            className="rounded bg-purple-500 px-2 py-1 text-xs text-white md:text-sm"
+            href="/filter"
+            className="hover:scale-105 rounded bg-purple-500 px-2 py-1 text-xs text-white md:text-sm"
           >
             View All
           </Link>
@@ -132,7 +132,7 @@ export const Animes = ({ movies, filter, search }) => {
           </div>
         )}
       </div>
-      {(movies || filter || search) && animes?.hasNextPage && (
+      {(movies || filter || search || recents) && animes?.hasNextPage && (
         <div className="absolute bottom-2 right-5">
           <button
             className={`px-2 text-white py-1 text-xs md:text-sm mx-1 rounded-sm ${

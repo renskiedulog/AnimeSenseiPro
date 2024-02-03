@@ -1,14 +1,28 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { makeRequest } from "@/API/request";
+import Link from "next/link";
+
 const SearchBox = () => {
   const router = useRouter();
   const [search, setSearch] = useState("");
+  const [searchedAnimes, setSearchedAnimes] = useState([]);
 
   const handleOnChange = (event) => {
     const { value } = event.target;
     setSearch(value);
   };
+
+  useEffect(() => {
+    if (search === "") {
+      setSearchedAnimes([]);
+    } else {
+      makeRequest(`/${search}`, { cache: "force-cache" }).then((res) =>
+        setSearchedAnimes(res?.results)
+      );
+    }
+  }, [search]);
 
   useEffect(() => {
     window.addEventListener("keypress", (e) => {
@@ -19,7 +33,7 @@ const SearchBox = () => {
   }, []);
 
   return (
-    <div className="search">
+    <div className="search relative">
       <div className="search-box">
         <div className="search-field">
           <input
@@ -52,6 +66,23 @@ const SearchBox = () => {
           </div>
         </div>
       </div>
+      <main className="flex flex-col absolute w-full z-50 bg-[#121212] max-h-60 overflow-y-scroll scrollbar">
+        {searchedAnimes?.map((anime, index) => (
+          <Link
+            key={index}
+            href={`/${anime?.id}`}
+            onClick={() => setSearch("")}
+            className="flex items-center border-b border-[#fff3] text-left text-sm md:text-base"
+          >
+            <img
+              src={anime?.image}
+              alt={anime?.title}
+              className="w-16 md:w-20 h-auto p-2 rounded-md"
+            />
+            <p className=" line-clamp-3 pr-3">{anime?.title}</p>
+          </Link>
+        ))}
+      </main>
     </div>
   );
 };

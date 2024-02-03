@@ -1,4 +1,5 @@
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/react";
 import { Roboto_Condensed } from "next/font/google";
 import "./globals.css";
 import NavBar from "./Components/NavBar";
@@ -18,6 +19,7 @@ export default function RootLayout({ children }) {
         <NavBar />
         {children}
         <SpeedInsights />
+        <Analytics />
         <Footer />
       </body>
     </html>

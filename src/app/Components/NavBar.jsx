@@ -52,10 +52,10 @@ const NavBar = () => {
             Social
           </Link>
           <Link
-            href="#"
+            href="/filter"
             className="px-2 py-[10px] text-xs font-normal hover:bg-purple-500 md:px-5 md:text-base"
           >
-            Genres
+            Filter
           </Link>
           <Link
             href="/filter/movies"

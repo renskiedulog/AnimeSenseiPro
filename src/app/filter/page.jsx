@@ -13,7 +13,7 @@ const page = async () => {
         <div>asdasd</div>
 
         {/* Animes */}
-        <Animes key="anime-feed" />
+        <Animes key="anime-feed" recents />
       </div>
       {/* Right */}
       <PopularAnimes key="anime-popular" animes={popular} />
