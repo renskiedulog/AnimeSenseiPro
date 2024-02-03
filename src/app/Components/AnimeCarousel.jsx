@@ -1,15 +1,19 @@
+// Import necessary modules and components
 "use client";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 
 const AnimeCarousel = ({ animes }) => {
+  // Define background colors based on content type
   const contentTypeBg = {
     sub: "bg-[green]",
     dub: "bg-[#AC87C5]",
   };
 
+  // Create a ref for the carousel
   const carouselRef = useRef(null);
 
+  // Set up the interval for automatic scrolling
   useEffect(() => {
     let intervalId;
 
@@ -60,8 +64,8 @@ const AnimeCarousel = ({ animes }) => {
       className="showcase scrollbar-hidden relative flex h-[200px] w-full snap-x snap-mandatory items-start overflow-x-auto overflow-y-hidden rounded-none md:rounded-md bg-cover bg-center bg-no-repeat transition-all md:h-[250px] md:rounded-r-none"
       ref={carouselRef}
     >
-      {animes.map((anime, index) => {
-        return (
+      {animes ? (
+        animes.map((anime, index) => (
           <div
             key={index}
             className="grid h-full w-full flex-shrink-0 snap-start grid-cols-[65%,35%] items-center gap-1 px-2 backdrop-blur-sm backdrop-brightness-50 transition-all md:grid-cols-[75%,25%] md:px-5"
@@ -139,10 +143,15 @@ const AnimeCarousel = ({ animes }) => {
               />
             </Link>
           </div>
-        );
-      })}
+        ))
+      ) : (
+        <div className="flex items-center justify-center w-full h-full">
+          Loading...
+        </div>
+      )}
     </div>
   );
 };
 
+// Export the AnimeCarousel component
 export default AnimeCarousel;

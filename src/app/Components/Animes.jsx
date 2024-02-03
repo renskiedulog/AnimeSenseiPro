@@ -21,16 +21,20 @@ export const Animes = ({ movies, filter, search }) => {
           : "/recent-episodes"
       }`,
       {
-        cache: "force-cache",
+        revalidate: 60,
       }
     ).then((res) => {
       setLoading(false);
       setAnimes(res);
     });
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // Optional: adds a smooth scrolling animation
+    });
   }, [page]);
 
   return (
-    <div className="background min-h-[50vh] h-full w-full rounded-none md:rounded relative">
+    <div className="background min-h-[50vh] h-full w-full rounded-none md:rounded relative pb-10">
       <header className="flex items-center justify-between border-b border-[#fff2] px-2 py-1 md:py-2">
         <p className="text-md md:text-lg">
           {movies
@@ -86,24 +90,36 @@ export const Animes = ({ movies, filter, search }) => {
         {!loading ? (
           animes?.results !== undefined && animes?.results?.length !== 0 ? (
             animes?.results?.map((anime, index) => (
-              <Link
+              <div
                 key={index}
-                title={anime?.title}
-                className="group w-full overflow-hidden hover:scale-[1.01] px-1 md:px-0"
-                href={`/${anime?.id}`}
+                className="w-full overflow-hidden hover:scale-[1.01] px-1 md:px-0 flex flex-col items-center"
               >
-                <img
-                  className="z-10 mx-auto aspect-[1/1.5] max-h-52 w-full rounded object-cover"
-                  src={anime?.image}
-                  alt={anime?.title}
-                />
-                <p
-                  className="my-1 h-5 overflow-hidden text-center text-sm group-hover:text-purple-500 md:text-base"
+                <Link
                   title={anime?.title}
+                  href={`/${anime?.id}`}
+                  className="group"
                 >
-                  {anime?.title}
-                </p>
-              </Link>
+                  <img
+                    className="z-10 mx-auto aspect-[1/1.5] max-h-52 w-full rounded object-cover"
+                    src={anime?.image}
+                    alt={anime?.title}
+                  />
+                  <p
+                    className="my-1 h-5 overflow-hidden text-center text-sm group-hover:text-purple-500 md:text-base"
+                    title={anime?.title}
+                  >
+                    {anime?.title}
+                  </p>
+                </Link>
+                {!movies && !search && !filter && (
+                  <Link
+                    className="md:text-base text-sm hover:text-purple-500"
+                    href={`/${anime?.id}/watch/${anime?.episodeId}`}
+                  >
+                    Episode {anime?.episodeNumber}
+                  </Link>
+                )}
+              </div>
             ))
           ) : (
             <div className="absolute left-1/2 top-1/2 translate-x-[-50%] translate-y-[-50%] text-center">
@@ -117,7 +133,7 @@ export const Animes = ({ movies, filter, search }) => {
         )}
       </div>
       {(movies || filter || search) && animes?.hasNextPage && (
-        <div className="absolute bottom-5 right-5">
+        <div className="absolute bottom-2 right-5">
           <button
             className={`px-2 text-white py-1 text-xs md:text-sm mx-1 rounded-sm ${
               page === 1 ? "bg-[#fff1]" : "bg-purple-500 hover:scale-105"

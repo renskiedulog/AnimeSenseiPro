@@ -11,22 +11,32 @@ export const makeRequest = async (endpoint, config) => {
 };
 
 export const getTopAnimes = async () => {
-    const top = await makeRequest("/top-airing", { revalidate: 3600 });
-    const popular = await makeRequest("/popular", { revalidate: 3600 });
-    return { top: top.results, popular: popular.results }
+    const [top, popular] = await Promise.all([
+        makeRequest("/top-airing", { revalidate: 3600 }),
+        makeRequest("/popular", { revalidate: 3600 })
+    ]);
+
+    return { top: top.results, popular: popular.results };
 }
 
+
 export const getCarousel = async () => {
-    let maxPage = 7, page = 1;
-    const carousel = [];
-    while (page < maxPage) {
-        let randomPage = Math.floor(Math.random() * 10),
-            randomIndex = Math.floor(Math.random() * 20);
-        const req = await makeRequest(`/popular?page=${randomPage}`, { cache: 'no-cache' });
-        const randomAnime = req.results[randomIndex];
-        const animeInfo = await makeRequest(`/info/${randomAnime?.id}`);
+    let maxPage = 6;
+    const carousel = [], indexes = [];
+    while (indexes.length != maxPage) {
+        const randomIndex = Math.floor(Math.random() * 20);
+        if (!indexes.includes(randomIndex)) {
+            indexes.push(randomIndex)
+        }
+    };
+
+    let randomPage = Math.floor(Math.random() * 20);
+    const req = await makeRequest(`/popular?page=${randomPage}`, { cache: 'force-cache' });
+
+    for (let i = 0; i < indexes.length; i++) {
+        const randomAnime = req.results[indexes[i]];
+        const animeInfo = await makeRequest(`/info/${randomAnime?.id}`, { cache: 'force-cache' });
         carousel.push(animeInfo);
-        page++
     }
     return carousel;
 }
@@ -34,7 +44,7 @@ export const getCarousel = async () => {
 export const getRandomAnime = async () => {
     let randomPage = Math.floor(Math.random() * 500),
         randomIndex = Math.floor(Math.random() * 20);
-    const req = await makeRequest(`/popular?page=${randomPage}`, { cache: 'no-cache' });
+    const req = await makeRequest(`/popular?page=${randomPage}`, { cache: 'force-cache' });
     const randomAnime = req.results[randomIndex];
     return randomAnime?.id;
 }
