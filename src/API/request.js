@@ -31,7 +31,7 @@ export const getCarousel = async () => {
     };
 
     let randomPage = Math.floor(Math.random() * 20);
-    const req = await makeRequest(`/popular?page=${randomPage}`, { cache: 'force-cache' });
+    const req = await makeRequest(`/popular?page=${randomPage}`, { cache: 'no-store' });
 
     for (let i = 0; i < indexes.length; i++) {
         const randomAnime = req.results[indexes[i]];
