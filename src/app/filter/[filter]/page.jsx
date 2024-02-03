@@ -1,8 +1,8 @@
 import { getTopAnimes } from "@/API/request";
-import Animes from "./../../Components/Animes";
-import PopularAnimes from "./../../Components/PopularAnimes";
+import Animes from "../../Components/Animes";
+import PopularAnimes from "../../Components/PopularAnimes";
 
-const page = async () => {
+const page = async ({ params }) => {
   const popular = await getTopAnimes();
   return (
     // Chapters And Top Anime Divider
@@ -13,7 +13,7 @@ const page = async () => {
         <div>asdasd</div>
 
         {/* Animes */}
-        <Animes key="anime-feed" movies />
+        <Animes key="anime-feed" filter={params?.filter} />
       </div>
       {/* Right */}
       <PopularAnimes key="anime-popular" animes={popular} />

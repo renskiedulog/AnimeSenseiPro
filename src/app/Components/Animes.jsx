@@ -3,49 +3,50 @@ import { makeRequest } from "@/API/request";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-export const Animes = ({ movies, filter, search, recents }) => {
+export const Animes = ({ filter, search, recents }) => {
   const [animes, setAnimes] = useState([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setAnimes([]);
     setLoading(true);
+
+    // Make Request
     makeRequest(
       `${
-        movies
-          ? `/movies?page=${page}`
-          : filter
-          ? `/genre/${filter}?page=${page}`
-          : search
-          ? `/${search}?page=${page}`
-          : `/recent-episodes?page=${page}`
-      }`,
+        search
+          ? `/${search}`
+          : recents
+          ? `/recent-episodes`
+          : filter === "movies"
+          ? `/movies`
+          : filter === "top"
+          ? `/top-airing`
+          : `/genre/${filter}`
+      }?page=${page}`,
       {
         revalidate: 60,
       }
     ).then((res) => {
-      setLoading(false);
       setAnimes(res);
+      setLoading(false);
+
+      // Scrolls When User Changes Mode
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth", // Optional: adds a smooth scrolling animation
+      });
     });
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth", // Optional: adds a smooth scrolling animation
-    });
-  }, [page]);
+  }, [page, filter, search]);
 
   return (
     <div className="background min-h-[50vh] h-full w-full rounded-none md:rounded relative pb-10">
       <header className="flex items-center justify-between border-b border-[#fff2] px-2 py-1 md:py-2">
         <p className="text-md md:text-lg">
-          {movies
-            ? "Movies"
-            : filter
-            ? filter
-            : search
-            ? "Search Results"
-            : "Latest"}
+          {filter ? filter.toUpperCase() : search ? "Search Results" : "Latest"}
         </p>
-        {movies || filter || recents ? (
+        {filter || recents ? (
           <div>
             <button
               className={`px-2 text-white py-1 text-xs md:text-sm mx-1 rounded-sm ${
@@ -111,7 +112,7 @@ export const Animes = ({ movies, filter, search, recents }) => {
                     {anime?.title}
                   </p>
                 </Link>
-                {!movies && !search && !filter && (
+                {!search && !filter && (
                   <Link
                     className="md:text-base text-sm hover:text-purple-500"
                     href={`/${anime?.id}/watch/${anime?.episodeId}`}
@@ -132,7 +133,7 @@ export const Animes = ({ movies, filter, search, recents }) => {
           </div>
         )}
       </div>
-      {(movies || filter || search || recents) && animes?.hasNextPage && (
+      {(filter || search || recents) && animes?.hasNextPage && (
         <div className="absolute bottom-2 right-5">
           <button
             className={`px-2 text-white py-1 text-xs md:text-sm mx-1 rounded-sm ${
