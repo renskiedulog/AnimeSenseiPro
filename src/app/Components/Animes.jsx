@@ -92,7 +92,7 @@ export const Animes = ({ filter, search, recents }) => {
                   className="group"
                 >
                   <img
-                    className="z-10 mx-auto md:aspect-[1/1.3] w-full rounded object-cover"
+                    className="z-10 mx-auto aspect-[1/1.5] max-h-60 w-full rounded object-cover"
                     src={anime?.image}
                     alt={anime?.title}
                   />
