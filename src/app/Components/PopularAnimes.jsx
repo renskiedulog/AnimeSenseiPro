@@ -45,7 +45,7 @@ const PopularAnimes = ({ animes }) => {
                 index === 0 ? "" : "border-t border-[#fff1]"
               }`}
             >
-              <div className="bg-purple-500 w-28 absolute top-2 z-20 text-center py-1 -rotate-45 left-[-2rem]">
+              <div className="bg-purple-500 text-white w-28 absolute top-2 z-20 text-center py-1 -rotate-45 left-[-2rem]">
                 <p className="rotate-45">{index + 1}</p>
               </div>
               <Link key={index} href={`/${anime?.id}`}>

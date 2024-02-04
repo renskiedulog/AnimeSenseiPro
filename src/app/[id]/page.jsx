@@ -1,4 +1,4 @@
-import { getTopAnimes, makeRequest } from "@/API/request";
+import { getRelatedAnimes, getTopAnimes, makeRequest } from "@/API/request";
 import Link from "next/link";
 import AnimeInfo from "./../Components/AnimeInfo";
 import Episodes from "./../Components/Episodes";
@@ -6,7 +6,9 @@ import PopularAnimes from "./../Components/PopularAnimes";
 import ErrorPage from "./../Components/ErrorPage";
 
 const page = async ({ params }) => {
-  const anime = await makeRequest(`/info/${params?.id}`, { revalidate: 60 });
+  const anime = await makeRequest(`/info/${params?.id}`, {
+    next: { revalidate: 3600 },
+  });
   const popular = await getTopAnimes();
   return anime?.id !== undefined ? (
     <div className="color-text my-5 mx-0 grid max-w-screen-2xl grid-cols-1 gap-2 md:mx-auto md:gap-5 md:px-16 md:py-16 lg:grid-cols-[70%,30%]">
@@ -19,9 +21,9 @@ const page = async ({ params }) => {
           <span>/</span>
           <p className="line-clamp-1">{anime?.title}</p>
         </div>
-        {/* Manga Info */}
+        {/* Anime Info */}
         <AnimeInfo anime={anime} />
-        {/* Manga Chapters */}
+        {/* Anime Chapters */}
         <Episodes episodes={anime?.episodes} animeId={anime?.id} />
       </div>
       <PopularAnimes animes={popular} />

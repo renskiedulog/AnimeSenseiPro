@@ -58,7 +58,7 @@ const Stream = ({ episodeId }) => {
         <a
           href={episode?.download}
           target="_blank"
-          className="px-2 py-1.5 rounded-sm self-end hover:scale-105 bg-purple-500 font-normal text-xs md:text-base"
+          className="px-2 py-1.5 rounded-sm self-end hover:scale-105 text-white bg-purple-500 font-normal text-xs md:text-base"
         >
           Download
         </a>

@@ -9,7 +9,7 @@ const AnimeInfo = ({ anime }) => {
         <img
           src={anime?.image}
           alt="anime-cover"
-          className="aspect-[1/1.5] w-2/4 rounded md:w-10/12"
+          className="aspect-[1/1.5] w-2/4 rounded md:w-10/12 object-cover"
         />
         {/* Button And Follows */}
         <div className="w-9/12 text-center md:w-10/12">

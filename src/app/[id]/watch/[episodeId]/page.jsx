@@ -9,7 +9,7 @@ const page = async ({ params }) => {
     (each) => each.id === params.episodeId
   );
   return (
-    <div className="min-h-[90vh] py-10 text-center font-bold text-white">
+    <div className="min-h-[90vh] py-10 text-center font-bold color-text">
       <div>
         <h1 className="text-2xl mx-2">{anime?.title}</h1>
         <h1 className="text-xl font-medium">
@@ -18,7 +18,7 @@ const page = async ({ params }) => {
         <div className="flex items-center justify-center gap-1 text-xs font-normal opacity-80 flex-wrap mx-3 md:mx-0">
           <p>Anime Details Can Be Found In</p>
           <Link
-            href={`/manga/${params.id}`}
+            href={`/${params.id}`}
             className="text-sm font-bold hover:text-purple-500"
           >
             {anime?.title}

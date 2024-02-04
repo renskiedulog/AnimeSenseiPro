@@ -70,19 +70,19 @@ const Episodes = ({ episodes, animeId, episodeId }) => {
       }`}
     >
       <div className="font-bold border-b border-[#fff2] w-full px-3 py-2 text-lg flex items-center justify-between">
-        <p className="text-lg text-white">EPISODES</p>
+        <p className="text-lg color-text">EPISODES</p>
         {episodeId && (
           <div className="md:text-base text-sm">
             {prevEpisode !== null ? (
               <button
-                className="mx-1 min-w-10 rounded hover:scale-105 bg-purple-500 px-3 md:px-5 py-1 font-normal"
+                className="mx-1 min-w-10 rounded hover:scale-105 text-white bg-purple-500 px-3 md:px-5 py-1 font-normal"
                 onClick={() => handleButton(prevEpisode)}
               >
                 Prev
               </button>
             ) : (
               <button
-                className="mx-1 min-w-10 rounded hover:scale-105 bg-[#fff1] px-3 md:px-5 py-1 font-normal"
+                className="mx-1 min-w-10 rounded hover:scale-105 color-text bg-[#fff1] px-3 md:px-5 py-1 font-normal"
                 disabled
               >
                 Prev
@@ -90,14 +90,14 @@ const Episodes = ({ episodes, animeId, episodeId }) => {
             )}
             {nextEpisode !== null ? (
               <button
-                className="mx-1 min-w-10 rounded hover:scale-105 bg-purple-500 px-3 md:px-5 py-1 font-normal"
+                className="mx-1 min-w-10 rounded hover:scale-105 text-white bg-purple-500 px-3 md:px-5 py-1 font-normal"
                 onClick={() => handleButton(nextEpisode)}
               >
                 Next
               </button>
             ) : (
               <button
-                className="mx-1 min-w-10 rounded hover:scale-105 bg-[#fff1] px-3 md:px-5 py-1 font-normal"
+                className="mx-1 min-w-10 rounded hover:scale-105 color-text bg-[#fff1] px-3 md:px-5 py-1 font-normal"
                 disabled
               >
                 Next
@@ -110,7 +110,9 @@ const Episodes = ({ episodes, animeId, episodeId }) => {
         <div className="px-3 py-2 flex flex-wrap gap-2">{filterButtons}</div>
       )}
       {episodes?.length === 0 ? (
-        <p>There are no episodes found.</p>
+        <p className="px-3 py-2">
+          There are no episodes found. This anime may not yet be aired.
+        </p>
       ) : (
         <div className="flex flex-wrap gap-2 md:gap-3 px-3 py-2 md:max-h-80 max-h-48 overflow-y-scroll scrollbar">
           {episodes?.map((episode, index) => {
@@ -125,7 +127,7 @@ const Episodes = ({ episodes, animeId, episodeId }) => {
                       : "bg-purple-500"
                   } hover:scale-105 px-2 py-1 w-20 flex-grow max-w-24 md:w-24 md:max-w-32`}
                 >
-                  <div className="text-center text-xs md:text-base">
+                  <div className="text-center text-xs md:text-base text-white">
                     <p>EP {episode.number}</p>
                   </div>
                 </Link>

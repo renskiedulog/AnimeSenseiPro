@@ -3,6 +3,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { makeRequest } from "@/API/request";
 import Link from "next/link";
+let searchTimeout;
 
 const SearchBox = () => {
   const router = useRouter();
@@ -12,21 +13,26 @@ const SearchBox = () => {
   const handleOnChange = (event) => {
     const { value } = event.target;
     setSearch(value);
-  };
 
-  useEffect(() => {
-    if (search === "") {
-      setSearchedAnimes([]);
-    } else {
-      makeRequest(`/${search}`, { cache: "force-cache" }).then((res) =>
-        setSearchedAnimes(res?.results)
-      );
-    }
-  }, [search]);
+    // Clear any existing timeout
+    clearTimeout(searchTimeout);
+
+    // Set a new timeout for 2000 milliseconds (2 seconds)
+    searchTimeout = setTimeout(() => {
+      if (value !== "") {
+        makeRequest(`/${value}`, { cache: "force-cache" }).then((res) =>
+          setSearchedAnimes(res?.results)
+        );
+      } else {
+        setSearchedAnimes([]);
+      }
+    }, 500);
+  };
 
   useEffect(() => {
     window.addEventListener("keypress", (e) => {
       if (e.key === "Enter") {
+        setSearchedAnimes([]);
         document.querySelector(".search-btn").click();
       }
     });
@@ -71,7 +77,10 @@ const SearchBox = () => {
           <Link
             key={index}
             href={`/${anime?.id}`}
-            onClick={() => setSearch("")}
+            onClick={() => {
+              setSearch("");
+              setSearchedAnimes([]);
+            }}
             className="flex items-center border-b border-[#fff3] text-left text-sm md:text-base"
           >
             <img

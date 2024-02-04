@@ -3,10 +3,11 @@ import { makeRequest } from "@/API/request";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-export const Animes = ({ filter, search, recents }) => {
+export const Animes = ({ filter, search, recents, typeFilter }) => {
   const [animes, setAnimes] = useState([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [type, setType] = useState(1);
 
   useEffect(() => {
     setAnimes([]);
@@ -24,10 +25,8 @@ export const Animes = ({ filter, search, recents }) => {
           : filter === "top"
           ? `/top-airing`
           : `/genre/${filter}`
-      }?page=${page}`,
-      {
-        revalidate: 60,
-      }
+      }?page=${page}${typeFilter && `&type=${type}`}`,
+      { next: { revalidate: 1800 } }
     ).then((res) => {
       setAnimes(res);
       setLoading(false);
@@ -38,7 +37,7 @@ export const Animes = ({ filter, search, recents }) => {
       top: 0,
       behavior: "smooth", // Optional: adds a smooth scrolling animation
     });
-  }, [page, filter, search]);
+  }, [page, filter, search, type]);
 
   return (
     <div className="background min-h-[50vh] h-full w-full rounded-none md:rounded relative pb-10">
@@ -46,11 +45,13 @@ export const Animes = ({ filter, search, recents }) => {
         <p className="text-md md:text-lg">
           {filter ? filter.toUpperCase() : search ? "Search Results" : "Latest"}
         </p>
-        {(filter || recents || (search && animes?.hasNextPage)) && (
-          <div>
+        {animes?.hasNextPage ? (
+          <div className="min-w-36">
             <button
-              className={`px-2 text-white py-1 text-xs md:text-sm mx-1 rounded-sm ${
-                page === 1 ? "bg-[#fff1]" : "bg-purple-500 hover:scale-105"
+              className={`px-2 py-1 text-xs md:text-sm mx-1 rounded-sm ${
+                page === 1
+                  ? "bg-[#fff1] color-text"
+                  : "bg-purple-500 hover:scale-105 text-white"
               }`}
               disabled={page === 1 ? true : false}
               onClick={() => setPage((prev) => parseInt(prev) - 1)}
@@ -59,15 +60,15 @@ export const Animes = ({ filter, search, recents }) => {
             </button>
             <input
               type="number"
-              className="increment-disabled mx-1 text-center text-white border-[#fff3] border bg-transparent max-w-10 p-1 rounded-md"
+              className="increment-disabled mx-1 text-center color-text border-[#fff3] border bg-transparent max-w-10 p-1 rounded-md"
               value={page}
               onChange={(e) => setPage(e.target.value)}
             />
             <button
-              className={`px-2 text-white py-1 text-xs md:text-sm mx-1 rounded-sm ${
+              className={`px-2 py-1 text-xs md:text-sm mx-1 rounded-sm ${
                 !animes?.hasNextPage
-                  ? "bg-[#fff1]"
-                  : "bg-purple-500 hover:scale-105"
+                  ? "bg-[#fff1] color-text"
+                  : "bg-purple-500 hover:scale-105 text-white"
               }`}
               disabled={!animes?.hasNextPage}
               onClick={() => setPage((prev) => parseInt(prev) + 1)}
@@ -75,8 +76,38 @@ export const Animes = ({ filter, search, recents }) => {
               Next
             </button>
           </div>
+        ) : (
+          <div className="min-w-36"></div>
         )}
       </header>
+      {typeFilter && (
+        <div className="px-3 py-2">
+          <button
+            className={`mx-1  text-white rounded px-3 text-sm md:text-base py-1 hover:scale-105 ${
+              type === 1 ? "bg-[#fff1]" : "bg-purple-500"
+            }`}
+            onClick={() => setType(1)}
+          >
+            JP Sub
+          </button>
+          <button
+            className={`mx-1  text-white rounded px-3 text-sm md:text-base py-1 hover:scale-105 ${
+              type === 2 ? "bg-[#fff1]" : "bg-purple-500"
+            }`}
+            onClick={() => setType(2)}
+          >
+            Eng Dub
+          </button>
+          <button
+            className={`mx-1  text-white rounded px-3 text-sm md:text-base py-1 hover:scale-105 ${
+              type === 3 ? "bg-[#fff1]" : "bg-purple-500"
+            }`}
+            onClick={() => setType(3)}
+          >
+            Chinese
+          </button>
+        </div>
+      )}
       {/* Manga Feed */}
       <div className="h-auto w-full gap-3 p-5 grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5">
         {!loading ? (
@@ -84,7 +115,7 @@ export const Animes = ({ filter, search, recents }) => {
             animes?.results?.map((anime, index) => (
               <div
                 key={index}
-                className="w-full overflow-hidden hover:scale-[1.01] px-1 md:px-0 flex flex-col items-center"
+                className="w-full overflow-hidden min-w-32 hover:scale-[1.01] px-1 md:px-0 flex flex-col items-center"
               >
                 <Link
                   title={anime?.title}
@@ -92,7 +123,7 @@ export const Animes = ({ filter, search, recents }) => {
                   className="group"
                 >
                   <img
-                    className="z-10 mx-auto aspect-[1/1.5] max-h-60 w-full rounded object-cover"
+                    className="z-10 mx-auto aspect-[1/1.4] max-h-32 md:min-h-52 min-h-60 rounded object-cover"
                     src={anime?.image}
                     alt={anime?.title}
                   />
@@ -127,8 +158,10 @@ export const Animes = ({ filter, search, recents }) => {
       {animes?.hasNextPage && (
         <div className="absolute bottom-2 right-5">
           <button
-            className={`px-2 text-white py-1 text-xs md:text-sm mx-1 rounded-sm ${
-              page === 1 ? "bg-[#fff1]" : "bg-purple-500 hover:scale-105"
+            className={`px-2 py-1 text-xs md:text-sm mx-1 rounded-sm ${
+              page === 1
+                ? "bg-[#fff1] color-text"
+                : "bg-purple-500 hover:scale-105 text-white"
             }`}
             disabled={page === 1 ? true : false}
             onClick={() => setPage((prev) => parseInt(prev) - 1)}
@@ -137,15 +170,15 @@ export const Animes = ({ filter, search, recents }) => {
           </button>
           <input
             type="number"
-            className="increment-disabled mx-1 text-center text-white border-[#fff3] border bg-transparent max-w-10 p-1 rounded-md"
+            className="increment-disabled mx-1 text-center color-text text-white border-[#fff3] border bg-transparent max-w-10 p-1 rounded-md"
             value={page}
             onChange={(e) => setPage(e.target.value)}
           />
           <button
-            className={`px-2 text-white py-1 text-xs md:text-sm mx-1 rounded-sm ${
+            className={`px-2 py-1 text-xs md:text-sm mx-1 rounded-sm ${
               !animes?.hasNextPage
-                ? "bg-[#fff1]"
-                : "bg-purple-500 hover:scale-105"
+                ? "bg-[#fff1] color-text"
+                : "bg-purple-500 hover:scale-105 text-white"
             }`}
             disabled={!animes?.hasNextPage}
             onClick={() => setPage((prev) => parseInt(prev) + 1)}
