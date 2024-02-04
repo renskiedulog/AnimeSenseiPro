@@ -86,7 +86,10 @@ export const Animes = ({ filter, search, recents, typeFilter }) => {
             className={`mx-1  text-white rounded px-3 text-sm md:text-base py-1 hover:scale-105 ${
               type === 1 ? "bg-[#fff1]" : "bg-purple-500"
             }`}
-            onClick={() => setType(1)}
+            onClick={() => {
+              setType(1);
+              setPage(1);
+            }}
           >
             JP Sub
           </button>
@@ -94,7 +97,10 @@ export const Animes = ({ filter, search, recents, typeFilter }) => {
             className={`mx-1  text-white rounded px-3 text-sm md:text-base py-1 hover:scale-105 ${
               type === 2 ? "bg-[#fff1]" : "bg-purple-500"
             }`}
-            onClick={() => setType(2)}
+            onClick={() => {
+              setType(2);
+              setPage(1);
+            }}
           >
             Eng Dub
           </button>
@@ -102,7 +108,10 @@ export const Animes = ({ filter, search, recents, typeFilter }) => {
             className={`mx-1  text-white rounded px-3 text-sm md:text-base py-1 hover:scale-105 ${
               type === 3 ? "bg-[#fff1]" : "bg-purple-500"
             }`}
-            onClick={() => setType(3)}
+            onClick={() => {
+              setType(3);
+              setPage(1);
+            }}
           >
             Chinese
           </button>
