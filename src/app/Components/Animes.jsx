@@ -12,7 +12,6 @@ export const Animes = ({ filter, search, recents, typeFilter }) => {
   useEffect(() => {
     setAnimes([]);
     setLoading(true);
-
     // Make Request
     makeRequest(
       `${
@@ -24,10 +23,13 @@ export const Animes = ({ filter, search, recents, typeFilter }) => {
           ? `/movies`
           : filter === "top"
           ? `/top-airing`
+          : filter === "popular"
+          ? `/popular`
           : `/genre/${filter}`
-      }?page=${page}${typeFilter && `&type=${type}`}`,
+      }?page=${page}${typeFilter ? `&type=${type}` : ""}`,
       { next: { revalidate: 1800 } }
     ).then((res) => {
+      console.log(res);
       setAnimes(res);
       setLoading(false);
     });

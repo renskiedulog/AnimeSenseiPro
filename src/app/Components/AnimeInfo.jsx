@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { genres } from "@/API/genres";
 
 const AnimeInfo = ({ anime }) => {
   return (
@@ -44,7 +45,9 @@ const AnimeInfo = ({ anime }) => {
           >
             <p className="font-light opacity-70">Release</p>
             <p className="flex items-center gap-1 opacity-70 text-xs text-center">
-              {anime?.type?.toUpperCase()}
+              {anime?.type?.toUpperCase() !== "MOVIE"
+                ? anime?.type?.toUpperCase()
+                : "-"}
             </p>
           </div>
         </div>
@@ -102,7 +105,11 @@ const AnimeInfo = ({ anime }) => {
           <div className="grid h-max grid-cols-2 py-2 text-sm md:text-base">
             <div className="flex flex-col gap-2">
               <h1>Season Released</h1>
-              <p className="font-light opacity-70">{anime?.type || "-"}</p>
+              <p className="font-light opacity-70">
+                {anime?.type?.toUpperCase() !== "MOVIE"
+                  ? anime?.type?.toUpperCase()
+                  : "-"}
+              </p>
               <h1>Release Date</h1>
               <p className="font-light opacity-70">
                 {anime?.releaseDate || "-"}
@@ -125,7 +132,7 @@ const AnimeInfo = ({ anime }) => {
               {anime?.genres?.map((genre, index) => (
                 <Link
                   key={index}
-                  href="#"
+                  href={`/filter/${genres[genre]}`}
                   className="rounded bg-[#fff1] px-2 py-1 hover:text-purple-500 hover:brightness-90"
                 >
                   {genre}

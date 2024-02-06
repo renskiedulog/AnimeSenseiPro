@@ -4,23 +4,9 @@ const Footer = () => {
   return (
     <>
       <div className="mx-auto flex w-full max-w-screen-2xl items-center justify-between bg-purple-600 px-2 py-2 text-white md:px-16">
-        <p className="text-xs md:text-base w-4/12 md:w-full">
-          Copyrights 2023 © All Rights Reserved.
-        </p>
-        <div className="flex items-center justify-center gap-2 text-xs md:text-base">
-          <Link href="#" className="hover:text-black">
-            Terms Of Service
-          </Link>
-          <p className="flex items-center justify-center gap-1">
-            <Link href="#" className="hover:text-black">
-              Privacy
-            </Link>
-            and
-            <Link href="#" className="hover:text-black">
-              Policy
-            </Link>
-          </p>
-        </div>
+        © AnimeSensei 2023. No copyrights intended. This is solely for the
+        purpose of learning and education. Any exploit of the work is
+        prohibited.
       </div>
       <div className="social-card text-primary">
         <a href="/" className="social-link1">
