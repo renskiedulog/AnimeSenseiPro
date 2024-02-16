@@ -48,7 +48,11 @@ const Stream = ({ episodeId }) => {
           >
             {episode?.sources?.map((source) => {
               return (
-                <option className="text-black" value={source.quality}>
+                <option
+                  className="text-black"
+                  key={source.quality}
+                  value={source.quality}
+                >
                   {source?.quality}
                 </option>
               );

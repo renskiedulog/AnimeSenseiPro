@@ -40,16 +40,10 @@ const NavBar = () => {
         {/* Left Side : User Related */}
         <div className="flex">
           <Link
-            href="#"
+            href="/bookmarks"
             className="px-2 py-[10px] text-xs font-normal hover:bg-purple-500 md:px-5 md:text-base"
           >
             Bookmarks
-          </Link>
-          <Link
-            href="#"
-            className="px-2 py-[10px] text-xs font-normal hover:bg-purple-500 md:px-5 md:text-base"
-          >
-            Social
           </Link>
           <Link
             href="/filter"

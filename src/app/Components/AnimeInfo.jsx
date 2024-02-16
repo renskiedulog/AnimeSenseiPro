@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { genres } from "@/API/genres";
+import BookmarkBtn from "./BookmarkBtn";
 
 const AnimeInfo = ({ anime }) => {
   return (
@@ -14,10 +15,7 @@ const AnimeInfo = ({ anime }) => {
         />
         {/* Button And Follows */}
         <div className="w-9/12 text-center md:w-10/12">
-          <button className="flex w-full items-center justify-center gap-1 rounded-md bg-purple-700 py-2 text-white hover:bg-purple-900">
-            <i className="fa-regular fa-bookmark"></i>
-            Bookmark
-          </button>
+          <BookmarkBtn animeId={anime?.id} />
         </div>
         {/* Language Type, Status and Type */}
         <div className="grid w-9/12 grid-cols-2 flex-col gap-1 py-2 text-sm md:flex md:w-10/12 md:py-0 md:pb-2">

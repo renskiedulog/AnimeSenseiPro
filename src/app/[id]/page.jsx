@@ -1,4 +1,4 @@
-import { getRelatedAnimes, getTopAnimes, makeRequest } from "@/API/request";
+import { getTopAnimes, makeRequest } from "@/API/request";
 import Link from "next/link";
 import AnimeInfo from "./../Components/AnimeInfo";
 import Episodes from "./../Components/Episodes";

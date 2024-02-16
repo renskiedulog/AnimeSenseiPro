@@ -1,5 +1,6 @@
 "use client";
 import { makeRequest } from "@/API/request";
+import { revalidateTag } from "next/cache";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -29,7 +30,6 @@ export const Animes = ({ filter, search, recents, typeFilter }) => {
       }?page=${page}${typeFilter ? `&type=${type}` : ""}`,
       { next: { revalidate: 1800 } }
     ).then((res) => {
-      console.log(res);
       setAnimes(res);
       setLoading(false);
     });
