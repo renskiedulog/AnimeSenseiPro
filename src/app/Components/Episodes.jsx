@@ -107,7 +107,9 @@ const Episodes = ({ episodes, animeId, episodeId }) => {
         )}
       </div>
       {episodes?.length > itemsPerPage && (
-        <div className="px-3 py-2 flex flex-wrap gap-2">{filterButtons}</div>
+        <div className="px-3 py-2 gap-2 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-5">
+          {filterButtons}
+        </div>
       )}
       {episodes?.length === 0 ? (
         <p className="px-3 py-2">
