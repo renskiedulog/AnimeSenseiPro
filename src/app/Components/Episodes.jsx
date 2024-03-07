@@ -49,7 +49,7 @@ const Episodes = ({ episodes, animeId, episodeId }) => {
     return (
       <button
         key={`button-${index}`}
-        className={`px-1 md:px-2 py-1 rounded text-xs md:text-sm w-24 flex-grow hover:scale-105 ${
+        className={`px-1 md:px-2 py-1 rounded text-xs md:text-sm w-full hover:scale-105 ${
           currentSet?.min === start || currentSet?.max === end
             ? "bg-purple-500"
             : "bg-[#fff1]"
@@ -114,7 +114,7 @@ const Episodes = ({ episodes, animeId, episodeId }) => {
           There are no episodes found. This anime may not yet be aired.
         </p>
       ) : (
-        <div className="flex flex-wrap gap-2 md:gap-3 px-3 py-2 md:max-h-80 max-h-48 overflow-y-scroll scrollbar">
+        <div className="md:max-h-80 max-h-48 overflow-y-scroll gap-2 p-2 md:gap-3 scrollbar grid grid-cols-3 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-5">
           {episodes?.map((episode, index) => {
             if (index >= minEpisodes && index <= maxEpisodes) {
               return (
@@ -125,7 +125,7 @@ const Episodes = ({ episodes, animeId, episodeId }) => {
                     episode?.id === episodeId
                       ? "bg-purple-700"
                       : "bg-purple-500"
-                  } hover:scale-105 px-2 py-1 w-20 flex-grow max-w-24 md:w-24 md:max-w-32`}
+                  } hover:scale-105 px-2 py-1 w-full`}
                 >
                   <div className="text-center text-xs md:text-base text-white">
                     <p>EP {episode.number}</p>
