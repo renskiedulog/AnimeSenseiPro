@@ -138,7 +138,7 @@ const AnimeCarousel = ({ animes }) => {
             </div>
             <Link href={`/${anime?.id}`} className="pr-3 md:pr-0">
               <img
-                className="relative z-10 aspect-auto rounded hover:scale-[1.03] md:w-full w-10/12"
+                className="relative z-10 aspect-auto rounded hover:scale-[1.03] md:w-full w-11/12"
                 src={anime?.image}
                 alt="anime-link"
               />
