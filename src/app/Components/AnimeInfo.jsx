@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { genres } from "@/API/genres";
 import BookmarkBtn from "./BookmarkBtn";
+import Image from "next/image";
 
 const AnimeInfo = ({ anime }) => {
   return (
@@ -8,7 +9,9 @@ const AnimeInfo = ({ anime }) => {
       className={`scrollbar pointer-events-auto z-50 flex flex-col overflow-auto rounded-none md:rounded-md bg-[#121212] py-3 md:flex-row background h-max w-full`}
     >
       <div className="flex min-w-52 flex-col items-center gap-2 md:w-56">
-        <img
+        <Image
+          height={900}
+          width={800}
           src={anime?.image}
           alt="anime-cover"
           className="aspect-[1/1.5] w-2/4 rounded md:w-10/12 object-cover"
