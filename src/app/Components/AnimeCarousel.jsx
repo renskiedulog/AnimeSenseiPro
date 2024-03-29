@@ -72,7 +72,7 @@ const AnimeCarousel = ({ animes }) => {
             key={index}
             className="grid h-full w-full flex-shrink-0 snap-start grid-cols-[65%,35%] items-center gap-1 px-2 backdrop-blur-sm backdrop-brightness-50 transition-all md:grid-cols-[75%,25%] md:px-5"
           >
-            <Image
+            <img
               height={750}
               width={600}
               src={anime?.image}
@@ -140,7 +140,7 @@ const AnimeCarousel = ({ animes }) => {
               </div>
             </div>
             <Link href={`/${anime?.id}`} className="pr-3 md:pr-0">
-              <Image
+              <img
                 height={750}
                 width={600}
                 className="relative z-10 aspect-auto rounded hover:scale-[1.03] md:w-full w-11/12"
